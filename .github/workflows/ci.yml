@@ -14,8 +14,8 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_DB: simplebank,
-          POSTGRES_USER: postgres,
+          POSTGRES_DB: simplebank
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: 1
         options: >-
           --health-cmd pg_isready
@@ -24,6 +24,7 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
+
     steps:
       - uses: actions/checkout@v4
 
@@ -42,7 +43,7 @@ jobs:
           sudo mv migrate /usr/local/bin/
           export PATH=$PATH:/usr/local/bin
           which migrate
-      
+
 
       - name: Run-Migration
         run: make migrateup
