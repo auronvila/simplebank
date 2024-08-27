@@ -14,7 +14,7 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_DB: simplebank
+          POSTGRES_DB: simple-bank
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: 1
         options: >-
