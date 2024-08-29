@@ -15,6 +15,10 @@ func NewServer(store *db.Store) *Server {
 	router := gin.Default()
 
 	router.POST("/accounts", server.createAccount)
+	router.GET("/account/:id", server.getAccount)
+	router.GET("/accounts", server.listAccount)
+	router.PUT("/account/:id", server.updateAccount)
+	router.DELETE("/account/:id", server.deleteAccount)
 
 	server.router = router
 	return server
@@ -26,4 +30,8 @@ func (server Server) Start(address string) error {
 
 func errorResponse(err error) gin.H {
 	return gin.H{"error": err.Error()}
+}
+
+func deleteResponse() gin.H {
+	return gin.H{"message": "the record got deleted successfully"}
 }

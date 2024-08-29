@@ -19,7 +19,7 @@ sqlc:
 test:
 	go test -v -cover ./...
 
-makeserver:
+server:
 	go run main.go
 
 .PHONY: postgres createdb dropdb migrateup migratedown sqlc makeserver

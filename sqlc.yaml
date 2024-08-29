@@ -12,3 +12,4 @@ sql:
         emit_exact_table_names: false
         out: "./db/sqlc/"
         sql_package: "database/sql"
+        emit_empty_slices: true
