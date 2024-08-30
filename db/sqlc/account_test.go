@@ -70,7 +70,7 @@ func TestQueries_UpdateAccount(t *testing.T) {
 
 func TestQueries_DeleteAccount(t *testing.T) {
 	account1 := createRandomAccount(t)
-	err := testQueries.DeleteAccount(context.Background(), account1.ID)
+	_, err := testQueries.DeleteAccount(context.Background(), account1.ID)
 
 	require.NoError(t, err)
 

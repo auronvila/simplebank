@@ -19,6 +19,11 @@ sqlc:
 test:
 	go test -v -cover ./...
 
+# dev
+devserver:
+	air
+
+# prod
 server:
 	go run main.go
 
