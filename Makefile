@@ -4,6 +4,15 @@ postgres:
 createdb:
 	docker exec -it postgres12 createdb --username=postgres --owner=postgres simple-bank
 
+createmigrate:
+	migrate create -ext sql -dir db/migration -seq <<MIGRATION NAME>>
+
+migrateup1:
+	migrate -path db/migration -database "postgres://postgres:1@localhost:5432/simple-bank?sslmode=disable" -verbose up 1
+
+migratedown1:
+	migrate -path db/migration -database "postgres://postgres:1@localhost:5432/simple-bank?sslmode=disable" -verbose down 1
+
 migrateup:
 	migrate -path db/migration -database "postgres://postgres:1@localhost:5432/simple-bank?sslmode=disable" -verbose up
 
@@ -30,4 +39,4 @@ server:
 mock:
 	mockgen -package mockdb -destination db/mock/store.go github.com/simplebank/db/sqlc Store
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc makeserver mock
+.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc makeserver mock
