@@ -45,7 +45,7 @@ jobs:
 
 
       - name: Run-Migration
-        run: make migrateup
+        run: make testdbmigrateup
 
       - name: Test
         run: make test
