@@ -5,6 +5,7 @@ import "github.com/spf13/viper"
 type Config struct {
 	DBDriver      string `mapstructure:"DB_DRIVER"`
 	DbSource      string `mapstructure:"DB_SOURCE"`
+	TestDbSource  string `mapstructure:"TEST_DB_SOURCE"`
 	ServerAddress string `mapstructure:"SERVER_ADDRESS"`
 }
 
