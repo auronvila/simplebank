@@ -15,7 +15,7 @@ type createAccountRequest struct {
 	Currency string `json:"currency" binding:"required,currency"`
 }
 
-func (server *Server) createAccount(ctx *gin.Context) {
+func (server *Server) CreateAccount(ctx *gin.Context) {
 	var req createAccountRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -48,7 +48,7 @@ type getAccountRequest struct {
 	ID int64 `uri:"id" binding:"required,min=1"`
 }
 
-func (server *Server) getAccount(ctx *gin.Context) {
+func (server *Server) GetAccount(ctx *gin.Context) {
 	var req getAccountRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -73,7 +73,7 @@ type listAccountRequest struct {
 	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
-func (server *Server) listAccount(ctx *gin.Context) {
+func (server *Server) ListAccount(ctx *gin.Context) {
 	var req listAccountRequest
 	if err := ctx.ShouldBindQuery(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -98,7 +98,7 @@ type deleteAccountReq struct {
 	ID int64 `uri:"id" binding:"required,min=0"`
 }
 
-func (server *Server) deleteAccount(ctx *gin.Context) {
+func (server *Server) DeleteAccount(ctx *gin.Context) {
 	var req deleteAccountReq
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -127,7 +127,7 @@ type updateAccountRequest struct {
 	Balance int64 `json:"balance" binding:"required"`
 }
 
-func (server *Server) updateAccount(ctx *gin.Context) {
+func (server *Server) UpdateAccount(ctx *gin.Context) {
 	accountId := ctx.Param("id")
 	accountIdInNum, _ := strconv.ParseInt(accountId, 36, 64)
 	var req updateAccountRequest
