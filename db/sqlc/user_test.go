@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func createRandomUser(t *testing.T) User {
+func CreateRandomUser(t *testing.T) User {
 	hashedPassword, err := util.HashPassword(util.RandomString(6))
 	require.NoError(t, err)
 	require.NotEmpty(t, hashedPassword)
@@ -34,11 +34,11 @@ func createRandomUser(t *testing.T) User {
 }
 
 func TestQueries_CreateUser(t *testing.T) {
-	createRandomUser(t)
+	CreateRandomUser(t)
 }
 
 func TestQueries_GetUser(t *testing.T) {
-	user1 := createRandomUser(t)
+	user1 := CreateRandomUser(t)
 	user2, err := testQueries.GetUser(context.Background(), user1.Username)
 
 	require.NoError(t, err)

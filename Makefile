@@ -28,6 +28,9 @@ testdbmigratedown:
 dropdb:
 	docker exec -it postgres12 dropdb simple-bank
 
+installSqlc:
+	brew install sqlc
+
 sqlc:
 	sqlc generate
 
