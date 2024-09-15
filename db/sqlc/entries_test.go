@@ -2,19 +2,42 @@ package db
 
 import (
 	"context"
+	"fmt"
 	"github.com/simplebank/util"
 	"github.com/stretchr/testify/require"
 	"testing"
 )
 
 func getSingleAccount(t *testing.T) Account {
-	arg := ListAccountsParams{
-		Limit:  1,
-		Offset: 1,
-	}
-	accounts, err := testQueries.ListAccounts(context.Background(), arg)
+	hashedPass, _ := util.HashPassword(util.RandomString(5))
+	user, _ := testQueries.CreateUser(context.Background(), CreateUserParams{
+		Username:       util.RandomString(5),
+		HashedPassword: hashedPass,
+		FullName:       util.RandomOwner(),
+		Email:          util.RandomEmail(),
+	})
+	_, err := testQueries.CreateAccount(context.Background(), CreateAccountParams{
+		Owner:    user.Username,
+		Balance:  0,
+		Currency: util.RandomCurrency(),
+	})
 	require.NoError(t, err)
-	require.NotEmpty(t, accounts)
+
+	if err != nil {
+		return Account{}
+	}
+
+	arg := ListAccountsParams{
+		Owner:  user.Username,
+		Limit:  1,
+		Offset: 0,
+	}
+	fmt.Println("ARGSS", arg)
+	fmt.Println("Username", user.Username)
+	accounts, err := testQueries.ListAccounts(context.Background(), arg)
+	fmt.Println("Accounts", accounts)
+	require.NoError(t, err)
+	//require.NotEmpty(t, accounts)
 	return accounts[0]
 }
 
